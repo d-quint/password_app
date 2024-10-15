@@ -8,7 +8,7 @@ import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 /**
  * Application entry point.
  */
-public class Main {
+public class PasswordCreation {
   public static void main(String[] args) {
     SwingUtilities.invokeLater(() -> {
       try {
