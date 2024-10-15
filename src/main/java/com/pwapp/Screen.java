@@ -117,13 +117,13 @@ public final class Screen extends JFrame implements ActionListener {
       if (!newPassword.equals(confirmPassword)) {
         JOptionPane.showMessageDialog(this, "Passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
       } else {
-        List<String> failedCriteria = getFailedPasswordCriteria(newPassword);
-        if (failedCriteria.isEmpty()) {
+        String failedCriteria = getFailedPasswordCriteria(newPassword);
+        if (failedCriteria.equals("safe")) {
           JOptionPane.showMessageDialog(this, "Password successfully created!", "Success",
               JOptionPane.INFORMATION_MESSAGE);
         } else {
           String errorMessage = "<html><b>Password does not meet the following criteria:</b><br>" +
-              String.join("<br>", failedCriteria) + "</html>";
+              failedCriteria + "</html>";
           JOptionPane.showMessageDialog(this, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
         }
       }
@@ -150,26 +150,37 @@ public final class Screen extends JFrame implements ActionListener {
   }
 
   /**
-   * Validates the password against the criteria.
-   *
+   * Validates the password against the criteria and returns a list of failed criteria.
+   * 
    * @param password the password to validate
-   * @return a list of failed criteria, empty if all criteria are met
+   * @return a failed criteria exception message
    */
-  private List<String> getFailedPasswordCriteria(String password) {
-    List<String> failedCriteria = new ArrayList<>();
+  private String getFailedPasswordCriteria(String password) {
+    try {
+      validatePassword(password);
+    } catch (PasswordValidationException e) {
+      return e.getMessage();
+    }
 
+    return "safe";
+  }
+
+  /**
+   * Validates the password against the criteria.
+   * 
+   * @param password the password to validate
+   * @throws PasswordValidationException if the password does not meet the criteria
+   */
+  private void validatePassword(String password) throws PasswordValidationException {
     if (password.length() < 8)
-      failedCriteria.add("&gt; Must be at least 8 characters long");
+      throw new LengthException();
     if (!Pattern.compile("[a-z]").matcher(password).find())
-      failedCriteria.add("&gt; Must contain at least one lowercase letter");
+      throw new LowercaseException();
     if (!Pattern.compile("[A-Z]").matcher(password).find())
-      failedCriteria.add("&gt; Must contain at least one uppercase letter");
+      throw new UppercaseException();
     if (!Pattern.compile("[0-9]").matcher(password).find())
-      failedCriteria.add("&gt; Must contain at least one number");
+      throw new NumberException();
     if (!Pattern.compile("[^a-zA-Z0-9]").matcher(password).find())
-      failedCriteria.add("&gt; Must contain at least one special character");
-
-    System.out.println(failedCriteria);
-    return failedCriteria;
+      throw new SpecialCharacterException();
   }
 }
