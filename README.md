@@ -35,4 +35,3 @@ Password Creation App is a simple application developed in Java using Swing for 
 - [Xhinvier07](https://github.com/Xhinvier07)
 - [Jccc07](https://github.com/Jccc07)
 - [DSandhu12](https://github.com/DSandhu12)
-```
