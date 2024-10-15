@@ -130,20 +130,7 @@ public final class Screen extends JFrame implements ActionListener {
       newPasswordField.setText("");
       confirmPasswordField.setText("");
     } else if (e.getSource() == exitButton) {
-      // Display goodbye message
-      String goodbyeMessage = "<html>" +
-          "<b>Thank you for using our Password Creation program!</b><br><br>" +
-          "<b>Created by:</b><br>" +
-          "&nbsp;&nbsp;&nbsp;&nbsp;Dane Quintano<br>" +
-          "&nbsp;&nbsp;&nbsp;&nbsp;Jansen Moral<br>" +
-          "&nbsp;&nbsp;&nbsp;&nbsp;Dharmveer Sandhu<br>" +
-          "&nbsp;&nbsp;&nbsp;&nbsp;John Paglinawan<br><br>" +
-          "of TN34" +
-          "</html>";
-      JOptionPane.showMessageDialog(this, goodbyeMessage, "Goodbye", JOptionPane.INFORMATION_MESSAGE);
-
-      // Exit the application
-      System.exit(0);
+      System.exit(0); // Exit the application
     }
   }
 
