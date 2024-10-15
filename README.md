@@ -24,8 +24,8 @@ Password Creation App is a simple application developed in Java using Swing for 
 
 1. Clone/download this repo then run `Screen`
 
-2. Download only the `password_app.jar` file and run this at the jar's directory:
+2. Download only the `PasswordCreation.jar` file and run this at the jar's directory:
    ```
-   java -jar password_app.jar
+   java -jar PasswordCreation.jar
    ```
 
